@@ -189,6 +189,50 @@
   #devSignInBtn:hover {
     color: #a0a;
   }
+
+  /* Featured Cheats Section */
+  .featured-cheats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+    margin-top: 3em;
+    padding: 0 1em;
+  }
+  .cheat-card {
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid #0ff;
+    border-radius: 10px;
+    width: 220px;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 0 0 15px #0ff;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .cheat-card:hover {
+    transform: scale(1.05);
+  }
+  .cheat-image {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.8em;
+    box-shadow: 0 0 10px #0ff;
+  }
+  .cheat-name {
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 0.3em;
+    color: #0ff;
+  }
+  .cheat-price {
+    font-size: 1.1em;
+    color: #0f0;
+    margin-bottom: 0.6em;
+  }
+
 </style>
 </head>
 <body>
@@ -229,6 +273,30 @@
     <div class="nav-button" onclick="showPage('freePage')">Free Cheats</div>
     <div class="nav-button" onclick="logout()">Logout</div>
   </div>
+
+  <h2 style="margin-top:3em; color:#0ff;">Featured Cheats</h2>
+  <div class="featured-cheats">
+    <div class="cheat-card" onclick="alert('Bought Fortnite Aimbot!')">
+      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/831/831347.png" alt="Fortnite Aimbot" />
+      <div class="cheat-name">Fortnite Aimbot</div>
+      <div class="cheat-price">Price: £15</div>
+    </div>
+    <div class="cheat-card" onclick="alert('Bought ESP Cheat!')">
+      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/4297/4297920.png" alt="ESP Cheat" />
+      <div class="cheat-name">ESP Cheat</div>
+      <div class="cheat-price">Price: £10</div>
+    </div>
+    <div class="cheat-card" onclick="alert('Bought Minecraft Cheats!')">
+      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/2593/2593175.png" alt="Minecraft Cheats" />
+      <div class="cheat-name">Minecraft Cheats</div>
+      <div class="cheat-price">Price: £12</div>
+    </div>
+    <div class="cheat-card" onclick="alert('Bought Roblox Executor!')">
+      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="Roblox Executor" />
+      <div class="cheat-name">Roblox Executor</div>
+      <div class="cheat-price">Price: £5</div>
+    </div>
+  </div>
 </div>
 
 <!-- Paid Cheats Page -->
@@ -245,7 +313,7 @@
 <div id="freePage" class="page">
   <h1>Free Cheats</h1>
   <img 
-    src="https://upload.wikimedia.org/wikipedia/en/3/3c/Blooket_Logo.png" 
+    src="https://static.wikia.nocookie.net/blooket/images/3/3e/Blooket_Logo.png" 
     alt="Blooket Logo" 
     class="blooket-image"
     title="Click Blooket Hacks"
@@ -370,4 +438,3 @@
 
 </body>
 </html>
-
