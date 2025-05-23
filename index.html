@@ -60,13 +60,13 @@
     color: #aaa;
   }
 
-  /* Login form styles */
-  .login-container {
+  /* Login & Signup container styles */
+  .form-container {
     background: rgba(255, 255, 255, 0.1);
     padding: 2em 3em;
     border-radius: 10px;
     box-shadow: 0 0 10px #0ff;
-    width: 300px;
+    width: 320px;
     margin: 0 auto;
   }
   input[type="text"], input[type="password"] {
@@ -151,6 +151,7 @@
     color: #0ff;
     font-weight: bold;
     user-select: none;
+    position: relative;
   }
   .file-icon:hover {
     background: rgba(0, 255, 255, 0.4);
@@ -166,7 +167,6 @@
     margin: 0 auto 10px;
     background: #0ff;
     border-radius: 4px;
-    position: relative;
     clip-path: polygon(
       0 0, 
       85% 0, 
@@ -187,6 +187,18 @@
     border-radius: 0 4px 0 0;
   }
 
+  /* Toggle login/signup links */
+  .toggle-link {
+    margin-top: 1em;
+    color: #0ff;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: underline;
+  }
+  .toggle-link:hover {
+    color: #08c;
+  }
+
 </style>
 </head>
 <body>
@@ -197,12 +209,24 @@
 <div id="loginPage" class="page active">
   <h1>Vexo Cheats and Hacks</h1>
   <p class="subtitle">Including school cheats</p>
-  <div class="login-container">
+  <div class="form-container" id="loginFormContainer">
     <form id="loginForm">
-      <input type="text" id="username" placeholder="Username" required />
-      <input type="password" id="password" placeholder="Password" required />
+      <input type="text" id="loginUsername" placeholder="Username" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
       <input type="submit" value="Login" />
     </form>
+    <div class="toggle-link" onclick="toggleForms()">Don't have an account? Sign Up</div>
+  </div>
+  
+  <!-- Signup form hidden by default -->
+  <div class="form-container" id="signupFormContainer" style="display:none;">
+    <form id="signupForm">
+      <input type="text" id="signupUsername" placeholder="Choose a Username" required />
+      <input type="password" id="signupPassword" placeholder="Choose a Password" required />
+      <input type="password" id="signupPasswordConfirm" placeholder="Confirm Password" required />
+      <input type="submit" value="Sign Up" />
+    </form>
+    <div class="toggle-link" onclick="toggleForms()">Already have an account? Login</div>
   </div>
 </div>
 
@@ -275,22 +299,76 @@
     document.getElementById(pageId).classList.add('active');
   }
 
+  // Toggle login/signup forms
+  function toggleForms() {
+    const loginContainer = document.getElementById('loginFormContainer');
+    const signupContainer = document.getElementById('signupFormContainer');
+    if(loginContainer.style.display === 'none') {
+      loginContainer.style.display = 'block';
+      signupContainer.style.display = 'none';
+    } else {
+      loginContainer.style.display = 'none';
+      signupContainer.style.display = 'block';
+    }
+  }
+
+  // Simple users storage (in-memory, for demo only)
+  const users = {
+    admin: 'password' // pre-created user
+  };
+
   // Login handling
   document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
 
-    // Simple hardcoded login check
-    if(username === 'admin' && password === 'password') {
+    if(users[username] && users[username] === password) {
       alert('Login successful! Welcome to Vexo Cheats and Hacks.');
       showPage('homePage');
       // Clear inputs
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
+      document.getElementById('loginUsername').value = '';
+      document.getElementById('loginPassword').value = '';
     } else {
       alert('Invalid username or password.');
     }
+  });
+
+  // Signup handling
+  document.getElementById('signupForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('signupUsername').value.trim();
+    const password = document.getElementById('signupPassword').value.trim();
+    const passwordConfirm = document.getElementById('signupPasswordConfirm').value.trim();
+
+    if(username.length < 3) {
+      alert('Username must be at least 3 characters.');
+      return;
+    }
+    if(password.length < 4) {
+      alert('Password must be at least 4 characters.');
+      return;
+    }
+    if(password !== passwordConfirm) {
+      alert('Passwords do not match.');
+      return;
+    }
+    if(users[username]) {
+      alert('Username already exists. Please choose another.');
+      return;
+    }
+
+    // Save new user
+    users[username] = password;
+    alert('Sign up successful! You can now log in.');
+
+    // Switch to login form
+    toggleForms();
+
+    // Clear signup form inputs
+    document.getElementById('signupUsername').value = '';
+    document.getElementById('signupPassword').value = '';
+    document.getElementById('signupPasswordConfirm').value = '';
   });
 
   // Logout function returns to login page
