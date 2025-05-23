@@ -248,6 +248,7 @@
     overflow-y: auto;
     z-index: 9999;
     user-select: none;
+    white-space: pre-wrap;
   }
 </style>
 </head>
@@ -268,52 +269,48 @@
       <input type="password" id="loginPassword" placeholder="Password" required />
       <input type="submit" value="Login" />
     </form>
-    <div class="toggle-link" onclick="toggleForms()">Don't have an account? Sign Up</div>
-    <div id="devSignInBtn" onclick="devSignIn()">Dev Sign In</div>
+    <div class="toggle-link" id="showSignUp">Don't have an account? Sign Up</div>
+    <div id="devSignInBtn">Dev Sign In</div>
   </div>
-  
-  <div class="form-container" id="signupFormContainer" style="display:none;">
-    <form id="signupForm">
-      <input type="text" id="signupUsername" placeholder="Choose a Username" required />
-      <input type="password" id="signupPassword" placeholder="Choose a Password" required />
-      <input type="password" id="signupPasswordConfirm" placeholder="Confirm Password" required />
+</div>
+
+<!-- Sign Up Page -->
+<div id="signUpPage" class="page">
+  <h1>Sign Up</h1>
+  <div class="form-container" id="signUpFormContainer">
+    <form id="signUpForm">
+      <input type="text" id="signUpUsername" placeholder="Choose Username" required />
+      <input type="password" id="signUpPassword" placeholder="Choose Password" required />
       <input type="submit" value="Sign Up" />
     </form>
-    <div class="toggle-link" onclick="toggleForms()">Already have an account? Login</div>
+    <div class="toggle-link" id="backToLogin">Back to Login</div>
   </div>
 </div>
 
 <!-- Home Page -->
 <div id="homePage" class="page">
   <h1>Welcome to Vexo Cheats and Hacks</h1>
-  <p class="subtitle">Select a category below</p>
   <div class="nav-buttons">
-    <div class="nav-button" onclick="showPage('paidPage')">Paid Cheats</div>
-    <div class="nav-button" onclick="showPage('freePage')">Free Cheats</div>
-    <div class="nav-button" onclick="logout()">Logout</div>
+    <a href="#" class="nav-button" id="toPaid">Paid Cheats</a>
+    <a href="#" class="nav-button" id="toFree">Free Cheats</a>
+    <a href="#" class="nav-button" id="logout">Logout</a>
   </div>
 
-  <h2 style="margin-top:3em; color:#0ff;">Featured Cheats</h2>
   <div class="featured-cheats">
-    <div class="cheat-card">
-      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/831/831347.png" alt="Fortnite Aimbot" />
-      <div class="cheat-name">Fortnite Aimbot</div>
-      <div class="cheat-price">Price: £15</div>
+    <div class="cheat-card" data-cheat="fortnite">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968315.png" alt="Fortnite Aimbot & ESP" class="cheat-image" />
+      <div class="cheat-name">Fortnite Aimbot & ESP</div>
+      <div class="cheat-price">£15</div>
     </div>
-    <div class="cheat-card">
-      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/4297/4297920.png" alt="ESP Cheat" />
-      <div class="cheat-name">ESP Cheat</div>
-      <div class="cheat-price">Price: £10</div>
-    </div>
-    <div class="cheat-card">
-      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/2593/2593175.png" alt="Minecraft Cheats" />
+    <div class="cheat-card" data-cheat="minecraft">
+      <img src="https://cdn-icons-png.flaticon.com/512/888/888879.png" alt="Minecraft Cheats" class="cheat-image" />
       <div class="cheat-name">Minecraft Cheats</div>
-      <div class="cheat-price">Price: £12</div>
+      <div class="cheat-price">£10</div>
     </div>
-    <div class="cheat-card">
-      <img class="cheat-image" src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="Roblox Executor" />
+    <div class="cheat-card" data-cheat="roblox">
+      <img src="https://cdn-icons-png.flaticon.com/512/2306/2306323.png" alt="Roblox Executor" class="cheat-image" />
       <div class="cheat-name">Roblox Executor</div>
-      <div class="cheat-price">Price: £5</div>
+      <div class="cheat-price">£5</div>
     </div>
   </div>
 </div>
@@ -321,130 +318,191 @@
 <!-- Paid Cheats Page -->
 <div id="paidPage" class="page">
   <h1>Paid Cheats</h1>
-  <p class="subtitle">Coming Soon...</p>
   <div class="nav-buttons">
-    <div class="nav-button" onclick="showPage('homePage')">Back to Home</div>
-    <div class="nav-button" onclick="logout()">Logout</div>
+    <a href="#" class="nav-button" id="paidToHome">Home</a>
+    <a href="#" class="nav-button" id="paidToFree">Free Cheats</a>
+    <a href="#" class="nav-button" id="paidLogout">Logout</a>
   </div>
+  <p>Here you can buy premium cheats. (Content can be expanded)</p>
 </div>
 
 <!-- Free Cheats Page -->
 <div id="freePage" class="page">
   <h1>Free Cheats</h1>
-  <img 
-    src="https://static.wikia.nocookie.net/blooket/images/3/3e/Blooket_Logo.png" 
-    alt="Blooket Logo" 
-    class="blooket-image"
-    title="Click Blooket Hacks"
-    onclick="alert('You clicked Blooket Hacks!')"
-  />
-  <div class="blooket-caption">Blooket Hacks</div>
-  
-  <div class="file-icons">
-    <div class="file-icon" onclick="alert('Opening Blooket Cheats File 1')">Blooket Cheats 1</div>
-    <div class="file-icon" onclick="alert('Opening Blooket Cheats File 2')">Blooket Cheats 2</div>
-    <div class="file-icon" onclick="alert('Opening Blooket Cheats File 3')">Blooket Cheats 3</div>
+  <div class="nav-buttons">
+    <a href="#" class="nav-button" id="freeToHome">Home</a>
+    <a href="#" class="nav-button" id="freeToPaid">Paid Cheats</a>
+    <a href="#" class="nav-button" id="freeLogout">Logout</a>
   </div>
-  <div class="nav-buttons" style="margin-top: 3em;">
-    <div class="nav-button" onclick="showPage('homePage')">Back to Home</div>
-    <div class="nav-button" onclick="logout()">Logout</div>
+
+  <img src="https://static.wikia.nocookie.net/blooket_gamepedia/images/9/92/Blooket_Logo.png" alt="Blooket Logo" class="blooket-image" id="blooketImage" />
+
+  <div class="blooket-caption">Blooket Hacks</div>
+
+  <div class="file-icons" id="blooketCheatsContainer" style="display:none;">
+    <div class="file-icon" data-file="blooketCheat1">Blooket Cheat 1</div>
+    <div class="file-icon" data-file="blooketCheat2">Blooket Cheat 2</div>
+    <div class="file-icon" data-file="blooketCheat3">Blooket Cheat 3</div>
   </div>
 </div>
 
 <script>
-  // Stars background
+  // Star background setup
+  const starsCount = 100;
   const starsContainer = document.getElementById('stars');
-  const starCount = 150;
-  for(let i=0; i<starCount; i++){
+  for(let i=0; i<starsCount; i++){
     const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 2 + 1;
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-    star.style.top = (Math.random() * 100) + '%';
-    star.style.left = (Math.random() * 100) + '%';
-    star.style.animationDelay = (Math.random() * 2) + 's';
+    star.classList.add('star');
+    star.style.width = star.style.height = (Math.random()*2 + 1) + 'px';
+    star.style.top = (Math.random()*100) + '%';
+    star.style.left = (Math.random()*100) + '%';
+    star.style.animationDelay = (Math.random()*2) + 's';
     starsContainer.appendChild(star);
   }
 
-  // Show page function
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
+  // Pages
+  const loginPage = document.getElementById('loginPage');
+  const signUpPage = document.getElementById('signUpPage');
+  const homePage = document.getElementById('homePage');
+  const paidPage = document.getElementById('paidPage');
+  const freePage = document.getElementById('freePage');
 
-  // Logout function
-  function logout() {
-    showPage('loginPage');
-  }
+  // Forms and buttons
+  const loginForm = document.getElementById('loginForm');
+  const signUpForm = document.getElementById('signUpForm');
+  const showSignUp = document.getElementById('showSignUp');
+  const backToLogin = document.getElementById('backToLogin');
+  const devSignInBtn = document.getElementById('devSignInBtn');
 
-  // Toggle between login and signup forms
-  function toggleForms() {
-    const loginForm = document.getElementById('loginFormContainer');
-    const signupForm = document.getElementById('signupFormContainer');
-    if(loginForm.style.display === 'none'){
-      loginForm.style.display = 'block';
-      signupForm.style.display = 'none';
-    } else {
-      loginForm.style.display = 'none';
-      signupForm.style.display = 'block';
-    }
-  }
+  // Navigation buttons
+  const toPaid = document.getElementById('toPaid');
+  const toFree = document.getElementById('toFree');
+  const logout = document.getElementById('logout');
+  const paidToHome = document.getElementById('paidToHome');
+  const paidToFree = document.getElementById('paidToFree');
+  const paidLogout = document.getElementById('paidLogout');
+  const freeToHome = document.getElementById('freeToHome');
+  const freeToPaid = document.getElementById('freeToPaid');
+  const freeLogout = document.getElementById('freeLogout');
 
-  // Users stored in memory (simple)
-  const users = {};
+  // Free page elements
+  const blooketImage = document.getElementById('blooketImage');
+  const blooketCheatsContainer = document.getElementById('blooketCheatsContainer');
 
-  // Signup form handling
-  document.getElementById('signupForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const user = document.getElementById('signupUsername').value.trim();
-    const pass = document.getElementById('signupPassword').value;
-    const passConfirm = document.getElementById('signupPasswordConfirm').value;
-    if(pass !== passConfirm){
-      alert("Passwords don't match!");
-      return;
-    }
-    if(users[user]){
-      alert("User already exists!");
-      return;
-    }
-    users[user] = pass;
-    alert("Sign up successful! You can now login.");
-    toggleForms();
-  });
-
-  // Login form handling
-  document.getElementById('loginForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const user = document.getElementById('loginUsername').value.trim();
-    const pass = document.getElementById('loginPassword').value;
-    if(users[user] && users[user] === pass){
-      alert("Login successful!");
-      showPage('homePage');
-    } else {
-      alert("Invalid username or password!");
-    }
-  });
-
-  // Dev sign in prompt and handling
-  function devSignIn(){
-    const devPass = prompt("Enter developer password:");
-    if(devPass === null) return; // canceled
-
-    if(devPass === 'test'){
-      alert("Welcome, Developer!");
-      showPage('homePage');
-    } else {
-      triggerHackerTerminal();
-    }
-  }
-
-  // Hacker Terminal functionality
+  // Hacker terminal
   const hackerTerminal = document.getElementById('hackerTerminal');
   let terminalInterval;
 
+  // Storage for users (just in-memory for demo)
+  const users = {};
+
+  // Utility to show a page and hide others
+  function showPage(page) {
+    [loginPage, signUpPage, homePage, paidPage, freePage].forEach(p => p.classList.remove('active'));
+    page.classList.add('active');
+  }
+
+  // Login form submit
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const u = document.getElementById('loginUsername').value.trim();
+    const p = document.getElementById('loginPassword').value.trim();
+    if(users[u] && users[u] === p){
+      showPage(homePage);
+    } else {
+      alert('Invalid username or password');
+    }
+  });
+
+  // Sign up toggle
+  showSignUp.addEventListener('click', () => showPage(signUpPage));
+  backToLogin.addEventListener('click', () => showPage(loginPage));
+
+  // Sign up form submit
+  signUpForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const u = document.getElementById('signUpUsername').value.trim();
+    const p = document.getElementById('signUpPassword').value.trim();
+    if(u in users){
+      alert('Username already exists!');
+      return;
+    }
+    users[u] = p;
+    alert('Account created! Please login.');
+    showPage(loginPage);
+  });
+
+  // Navigation buttons
+  toPaid.addEventListener('click', e => { e.preventDefault(); showPage(paidPage); });
+  toFree.addEventListener('click', e => { e.preventDefault(); showPage(freePage); });
+  logout.addEventListener('click', e => { e.preventDefault(); showPage(loginPage); });
+
+  paidToHome.addEventListener('click', e => { e.preventDefault(); showPage(homePage); });
+  paidToFree.addEventListener('click', e => { e.preventDefault(); showPage(freePage); });
+  paidLogout.addEventListener('click', e => { e.preventDefault(); showPage(loginPage); });
+
+  freeToHome.addEventListener('click', e => { e.preventDefault(); showPage(homePage); });
+  freeToPaid.addEventListener('click', e => { e.preventDefault(); showPage(paidPage); });
+  freeLogout.addEventListener('click', e => { e.preventDefault(); showPage(loginPage); });
+
+  // Blooket cheats toggle
+  blooketImage.addEventListener('click', () => {
+    if(blooketCheatsContainer.style.display === 'none'){
+      blooketCheatsContainer.style.display = 'flex';
+    } else {
+      blooketCheatsContainer.style.display = 'none';
+    }
+  });
+
+  // File icons click (fake downloads)
+  const boughtFiles = new Set();
+  document.querySelectorAll('.file-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+      if(!boughtFiles.has(icon.dataset.file)){
+        alert('Bought!');
+        icon.textContent = 'Download File';
+        boughtFiles.add(icon.dataset.file);
+      } else {
+        alert('Fake download started. (This is a prank file)');
+        showFakeFileContent();
+      }
+    });
+  });
+
+  // Cheat cards click in featured cheats - just alert buy prompt
+  document.querySelectorAll('.cheat-card').forEach(card => {
+    card.addEventListener('click', () => {
+      alert(`You bought ${card.querySelector('.cheat-name').textContent} for ${card.querySelector('.cheat-price').textContent}! (Fake purchase)`);
+    });
+  });
+
+  // Dev sign in handling
+  devSignInBtn.addEventListener('click', () => {
+    const devPass = prompt('Enter dev password:');
+    if(devPass === 'test'){
+      alert('Dev login successful!');
+      showPage(homePage);
+    } else {
+      triggerHackerTerminal();
+    }
+  });
+
+  // Fake file content popup
+  function showFakeFileContent(){
+    const codeSamples = [
+      'function hack() {\n  console.log("Hacking...");\n  // TODO: exploit here\n}',
+      'var exploit = "xyz123";\nalert(exploit);',
+      'sudo rm -rf / --no-preserve-root',
+      'while(true) { console.log("You got hacked!"); }',
+      '#include <stdio.h>\nint main() { printf("Exploit"); return 0; }',
+      'System.out.println("Malware running...");'
+    ];
+    const randomCode = codeSamples[Math.floor(Math.random()*codeSamples.length)];
+    alert('Fake file content:\n\n' + randomCode);
+  }
+
+  // Hacker Terminal stuff
   function triggerHackerTerminal(){
-    // Show terminal
     hackerTerminal.style.display = 'block';
     hackerTerminal.textContent = '';
     let lines = [
@@ -474,24 +532,24 @@
 
     let currentLine = 0;
 
-    // Clear any previous intervals
     if(terminalInterval) clearInterval(terminalInterval);
 
-    // Function to print lines with some random hacker gibberish in between
     function printNextLine() {
       if(currentLine < lines.length){
         hackerTerminal.textContent += lines[currentLine] + '\n';
         currentLine++;
       } else {
         clearInterval(terminalInterval);
-        // After showing, allow click to dismiss
-        hackerTerminal.style.cursor = 'pointer';
-        hackerTerminal.title = "Click to close hacker terminal";
-        hackerTerminal.addEventListener('click', closeHackerTerminalOnce);
+        hackerTerminal.textContent += "\nPowering off iPad...\n";
+        setTimeout(() => {
+          document.body.style.transition = 'background-color 3s ease';
+          document.body.style.backgroundColor = 'black';
+          hackerTerminal.style.transition = 'opacity 3s ease';
+          hackerTerminal.style.opacity = '0';
+        }, 1000);
       }
     }
 
-    // Also add random gibberish lines every second alongside messages
     function printGibberish(){
       const chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:",.<>?/~`';
       let gibLine = '';
@@ -511,14 +569,6 @@
     }, 500);
   }
 
-  function closeHackerTerminalOnce(){
-    hackerTerminal.style.display = 'none';
-    hackerTerminal.textContent = '';
-    hackerTerminal.style.cursor = 'default';
-    hackerTerminal.title = '';
-    hackerTerminal.removeEventListener('click', closeHackerTerminalOnce);
-  }
 </script>
-
 </body>
 </html>
