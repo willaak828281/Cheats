@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vexo Cheats and Hacks - Login</title>
+<style>
+  /* Black background */
+  body {
+    margin: 0;
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Stars container */
+  #stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Each star */
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite ease-in-out;
+  }
+
+  /* Twinkle animation */
+  @keyframes twinkle {
+    0%, 100% {opacity: 0.8;}
+    50% {opacity: 0.2;}
+  }
+
+  /* Title */
+  h1 {
+    z-index: 1;
+    font-size: 3em;
+    margin-bottom: 0.1em;
+  }
+
+  /* Subtitle */
+  p.subtitle {
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 2em;
+    color: #aaa;
+    z-index: 1;
+  }
+
+  /* Login form container */
+  .login-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2em 3em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #0ff;
+    z-index: 1;
+    width: 300px;
+  }
+
+  /* Form elements */
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 0.6em;
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    padding: 0.7em;
+    background: #0ff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    font-size: 1.1em;
+    transition: background 0.3s ease;
+  }
+
+  input[type="submit"]:hover {
+    background: #08c;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<h1>Vexo Cheats and Hacks</h1>
+<p class="subtitle">Including school cheats</p>
+
+<div class="login-container">
+  <form onsubmit="return login(event)">
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <input type="submit" value="Login" />
+  </form>
+</div>
+
+<script>
+  // Create stars randomly positioned and sized with twinkle animation delay
+  const starsContainer = document.getElementById('stars');
+  const starCount = 100;
+
+  for(let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    // Random size between 1px and 3px
+    const size = Math.random() * 2 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+
+    // Random position
+    star.style.top = Math.random() * 100 + '%';
+    star.style.left = Math.random() * 100 + '%';
+
+    // Random animation delay for twinkle effect
+    star.style.animationDelay = (Math.random() * 2) + 's';
+
+    starsContainer.appendChild(star);
+  }
+
+  // Dummy login function for demonstration
+  function login(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Just a simple hardcoded check for demo
+    if(username === 'admin' && password === 'password') {
+      alert('Login successful! Welcome to Vexo Cheats and Hacks.');
+      // Redirect or show protected content here
+    } else {
+      alert('Invalid username or password.');
+    }
+    return false;
+  }
+</script>
+
+</body>
+</html>
