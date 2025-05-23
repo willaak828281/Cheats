@@ -3,34 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vexo Cheats and Hacks - Login</title>
+<title>Vexo Cheats and Hacks</title>
 <style>
-  /* Black background */
-  body {
-    margin: 0;
-    height: 100vh;
+  body, html {
+    margin: 0; padding: 0; height: 100%;
     background: black;
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
-
-  /* Stars container */
   #stars {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 0;
   }
-
-  /* Each star */
   .star {
     position: absolute;
     background: white;
@@ -38,40 +27,48 @@
     opacity: 0.8;
     animation: twinkle 2s infinite ease-in-out;
   }
-
-  /* Twinkle animation */
   @keyframes twinkle {
     0%, 100% {opacity: 0.8;}
     50% {opacity: 0.2;}
   }
 
-  /* Title */
-  h1 {
+  /* Common container for all pages */
+  .page {
+    display: none;
+    position: relative;
     z-index: 1;
+    min-height: 100vh;
+    padding: 2em;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* Show active page */
+  .active {
+    display: block;
+  }
+
+  /* Title styles */
+  h1 {
     font-size: 3em;
     margin-bottom: 0.1em;
   }
-
-  /* Subtitle */
   p.subtitle {
     font-size: 1.2em;
     margin-top: 0;
     margin-bottom: 2em;
     color: #aaa;
-    z-index: 1;
   }
 
-  /* Login form container */
+  /* Login form styles */
   .login-container {
     background: rgba(255, 255, 255, 0.1);
     padding: 2em 3em;
     border-radius: 10px;
     box-shadow: 0 0 10px #0ff;
-    z-index: 1;
     width: 300px;
+    margin: 0 auto;
   }
-
-  /* Form elements */
   input[type="text"], input[type="password"] {
     width: 100%;
     padding: 0.6em;
@@ -80,7 +77,6 @@
     border-radius: 5px;
     font-size: 1em;
   }
-
   input[type="submit"] {
     width: 100%;
     padding: 0.7em;
@@ -93,66 +89,215 @@
     font-size: 1.1em;
     transition: background 0.3s ease;
   }
-
   input[type="submit"]:hover {
     background: #08c;
     color: white;
   }
+
+  /* Navigation buttons on Home */
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin-top: 2em;
+  }
+  .nav-button {
+    padding: 1em 2em;
+    background: #0ff;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  .nav-button:hover {
+    background: #08c;
+    color: white;
+  }
+
+  /* Free page Blooket image */
+  .blooket-image {
+    max-width: 250px;
+    border-radius: 10px;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    box-shadow: 0 0 10px #0ff;
+  }
+  .blooket-caption {
+    font-size: 1.4em;
+    margin-bottom: 1.5em;
+    color: #0ff;
+  }
+
+  /* File icon container */
+  .file-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    flex-wrap: wrap;
+  }
+
+  /* Each file icon style */
+  .file-icon {
+    background: rgba(0, 255, 255, 0.2);
+    border: 2px solid #0ff;
+    border-radius: 8px;
+    padding: 1.5em;
+    width: 140px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    color: #0ff;
+    font-weight: bold;
+    user-select: none;
+  }
+  .file-icon:hover {
+    background: rgba(0, 255, 255, 0.4);
+    transform: scale(1.1);
+  }
+
+  /* File icon "image" - simplified file shape with a folded corner */
+  .file-icon::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 70px;
+    margin: 0 auto 10px;
+    background: #0ff;
+    border-radius: 4px;
+    position: relative;
+    clip-path: polygon(
+      0 0, 
+      85% 0, 
+      100% 15%, 
+      100% 100%, 
+      0 100%
+    );
+  }
+  .file-icon::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: black;
+    top: 0;
+    right: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    border-radius: 0 4px 0 0;
+  }
+
 </style>
 </head>
 <body>
 
 <div id="stars"></div>
 
-<h1>Vexo Cheats and Hacks</h1>
-<p class="subtitle">Including school cheats</p>
+<!-- Login Page -->
+<div id="loginPage" class="page active">
+  <h1>Vexo Cheats and Hacks</h1>
+  <p class="subtitle">Including school cheats</p>
+  <div class="login-container">
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+</div>
 
-<div class="login-container">
-  <form onsubmit="return login(event)">
-    <input type="text" id="username" placeholder="Username" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <input type="submit" value="Login" />
-  </form>
+<!-- Home Page -->
+<div id="homePage" class="page">
+  <h1>Welcome to Vexo Cheats and Hacks</h1>
+  <p class="subtitle">Select a category below</p>
+  <div class="nav-buttons">
+    <div class="nav-button" onclick="showPage('paidPage')">Paid Cheats</div>
+    <div class="nav-button" onclick="showPage('freePage')">Free Cheats</div>
+    <div class="nav-button" onclick="logout()">Logout</div>
+  </div>
+</div>
+
+<!-- Paid Cheats Page -->
+<div id="paidPage" class="page">
+  <h1>Paid Cheats</h1>
+  <p class="subtitle">Coming Soon...</p>
+  <div class="nav-buttons">
+    <div class="nav-button" onclick="showPage('homePage')">Back to Home</div>
+    <div class="nav-button" onclick="logout()">Logout</div>
+  </div>
+</div>
+
+<!-- Free Cheats Page -->
+<div id="freePage" class="page">
+  <h1>Free Cheats</h1>
+  <img 
+    src="https://upload.wikimedia.org/wikipedia/en/3/3c/Blooket_Logo.png" 
+    alt="Blooket Logo" 
+    class="blooket-image"
+    title="Click Blooket Hacks"
+    onclick="alert('You clicked Blooket Hacks!')"
+  />
+  <div class="blooket-caption">Blooket Hacks</div>
+  
+  <div class="file-icons">
+    <div class="file-icon" onclick="alert('Opening Blooket Cheats File 1')">Blooket Cheats 1</div>
+    <div class="file-icon" onclick="alert('Opening Blooket Cheats File 2')">Blooket Cheats 2</div>
+    <div class="file-icon" onclick="alert('Opening Blooket Cheats File 3')">Blooket Cheats 3</div>
+  </div>
+
+  <div class="nav-buttons" style="margin-top: 3em;">
+    <div class="nav-button" onclick="showPage('homePage')">Back to Home</div>
+    <div class="nav-button" onclick="logout()">Logout</div>
+  </div>
 </div>
 
 <script>
-  // Create stars randomly positioned and sized with twinkle animation delay
+  // Stars creation
   const starsContainer = document.getElementById('stars');
   const starCount = 100;
-
   for(let i = 0; i < starCount; i++) {
     const star = document.createElement('div');
     star.classList.add('star');
-
-    // Random size between 1px and 3px
     const size = Math.random() * 2 + 1;
     star.style.width = size + 'px';
     star.style.height = size + 'px';
-
-    // Random position
     star.style.top = Math.random() * 100 + '%';
     star.style.left = Math.random() * 100 + '%';
-
-    // Random animation delay for twinkle effect
     star.style.animationDelay = (Math.random() * 2) + 's';
-
     starsContainer.appendChild(star);
   }
 
-  // Dummy login function for demonstration
-  function login(event) {
+  // Page show/hide function
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+      page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
+  }
+
+  // Login handling
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
 
-    // Just a simple hardcoded check for demo
+    // Simple hardcoded login check
     if(username === 'admin' && password === 'password') {
       alert('Login successful! Welcome to Vexo Cheats and Hacks.');
-      // Redirect or show protected content here
+      showPage('homePage');
+      // Clear inputs
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
     } else {
       alert('Invalid username or password.');
     }
-    return false;
+  });
+
+  // Logout function returns to login page
+  function logout() {
+    if(confirm('Are you sure you want to logout?')) {
+      showPage('loginPage');
+    }
   }
 </script>
 
